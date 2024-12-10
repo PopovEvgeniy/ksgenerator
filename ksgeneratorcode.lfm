@@ -1,0 +1,50 @@
+object Form1: TForm1
+  Left = 257
+  Height = 173
+  Top = 250
+  Width = 513
+  Caption = 'Kms script generator'
+  ClientHeight = 173
+  ClientWidth = 513
+  LCLVersion = '4.0.0.1'
+  OnCreate = FormCreate
+  object LabeledEdit1: TLabeledEdit
+    Left = 152
+    Height = 23
+    Top = 32
+    Width = 352
+    EditLabel.Height = 23
+    EditLabel.Width = 81
+    EditLabel.Caption = 'The KMS server'
+    LabelPosition = lpLeft
+    TabOrder = 0
+    Text = 'LabeledEdit1'
+    OnChange = LabeledEdit1Change
+  end
+  object LabeledEdit2: TLabeledEdit
+    Left = 152
+    Height = 23
+    Top = 80
+    Width = 352
+    EditLabel.Height = 23
+    EditLabel.Width = 86
+    EditLabel.Caption = 'The product key'
+    LabelPosition = lpLeft
+    TabOrder = 1
+    Text = 'LabeledEdit2'
+    OnChange = LabeledEdit2Change
+  end
+  object Button1: TButton
+    Left = 240
+    Height = 25
+    Top = 120
+    Width = 96
+    Caption = 'Generate'
+    TabOrder = 2
+    OnClick = Button1Click
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 384
+    Top = 112
+  end
+end
