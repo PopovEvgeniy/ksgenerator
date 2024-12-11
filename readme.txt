@@ -1,6 +1,6 @@
                                          Kms script generator
 
-                                           Version 0.2.1
+                                           Version 0.2.2
 
                    The kms activation script generator for Microsoft Windows by Popov Evgeniy Alekseyevich
 
@@ -40,3 +40,4 @@ Version history
 
 0.1: Initial version.
 0.2-0.2.1: The small bug has been fixed.
+0.2.2: The small changes.

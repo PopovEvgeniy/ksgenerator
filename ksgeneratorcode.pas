@@ -20,6 +20,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure LabeledEdit1Change(Sender: TObject);
     procedure LabeledEdit2Change(Sender: TObject);
+    procedure SaveDialog1CanClose(Sender: TObject; var CanClose: Boolean);
   private
 
   public
@@ -36,7 +37,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='Kms script generator';
- Form1.Caption:='Kms script generator 0.2.1';
+ Form1.Caption:='Kms script generator 0.2.2';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -105,11 +106,7 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
- if Form1.SaveDialog1.Execute()=True then
- begin
-  if generate_script(Form1.SaveDialog1.FileName,Form1.LabeledEdit1.Text,Form1.LabeledEdit2.Text)=False then ShowMessage('The operation failed');
- end;
-
+ Form1.SaveDialog1.Execute();
 end;
 
 procedure TForm1.LabeledEdit1Change(Sender: TObject);
@@ -120,6 +117,15 @@ end;
 procedure TForm1.LabeledEdit2Change(Sender: TObject);
 begin
  Form1.Button1.Enabled:=(Form1.LabeledEdit1.Text<>'') and (Form1.LabeledEdit2.Text<>'');
+end;
+
+procedure TForm1.SaveDialog1CanClose(Sender: TObject; var CanClose: Boolean);
+begin
+ if generate_script(Form1.SaveDialog1.FileName,Form1.LabeledEdit1.Text,Form1.LabeledEdit2.Text)=False then
+ begin
+  ShowMessage('The operation failed');
+ end;
+
 end;
 
 end.

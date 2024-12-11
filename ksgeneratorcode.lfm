@@ -44,6 +44,7 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object SaveDialog1: TSaveDialog
+    OnCanClose = SaveDialog1CanClose
     Left = 384
     Top = 112
   end
