@@ -37,7 +37,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='Kms script generator';
- Form1.Caption:='Kms script generator 0.2.2';
+ Form1.Caption:='Kms script generator 0.2.3';
  Form1.BorderStyle:=bsDialog;
  Form1.Font.Name:=Screen.MenuFont.Name;
  Form1.Font.Size:=14;
@@ -80,12 +80,14 @@ end;
 function generate_script(const target:string;const server:string;const key:string):boolean;
 var batch:text;
 var script:string;
+var success:boolean;
 begin
  {$I-}
  script:=ExtractFileNameWithoutExt(target)+'.bat';
  Assign(batch,script);
  Rewrite(batch);
- if IOResult()=0 then
+ success:=IOResult()=0;
+ if success=True then
  begin
   writeln(batch,'@echo off');
   writeln(batch,'slmgr /ipk ',key);
@@ -94,7 +96,7 @@ begin
   Close(batch);
  end;
  {$I+}
- generate_script:=FileExists(script);
+ generate_script:=success;
 end;
 
 { TForm1 }
