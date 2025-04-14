@@ -1,8 +1,8 @@
-                                         Kms script generator
+                                         KMS script generator
 
-                                           Version 0.2.4
+                                           Version 0.2.8
 
-                   The kms activation script generator for Microsoft Windows by Popov Evgeniy Alekseyevich
+                   The KMS activation script generator for Microsoft Windows by Popov Evgeniy Alekseyevich
 
 System requirements
 
@@ -33,10 +33,12 @@ You can send me a letter at tuzik87@inbox.ru.
 About program modification
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 4.0 RC1 or higher.
+It can be compiled under Lazarus 4.0 RC3 or higher.
 
 Version history
 
 0.1: Initial version.
 0.2-0.2.1: The small bug has been fixed.
 0.2.2-0.2.4: The small changes.
+0.2.5: The source code was recompiled under Lazarus 4.0 RC3.
+0.2.6-0.2.8: The small changes.
