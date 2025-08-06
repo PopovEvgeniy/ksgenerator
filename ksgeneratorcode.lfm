@@ -6,7 +6,7 @@ object MainWindow: TMainWindow
   Caption = 'KMS script generator'
   ClientHeight = 173
   ClientWidth = 513
-  LCLVersion = '4.0.0.3'
+  LCLVersion = '4.2.0.0'
   OnCreate = FormCreate
   object ServerField: TLabeledEdit
     Left = 152

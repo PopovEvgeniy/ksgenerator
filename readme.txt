@@ -1,6 +1,6 @@
                                          KMS script generator
 
-                                           Version 0.2.8
+                                           Version 0.2.9
 
                    The KMS activation script generator for Microsoft Windows by Popov Evgeniy Alekseyevich
 
@@ -24,16 +24,12 @@ You can take the keys here: https://docs.microsoft.com/en-us/windows-server/get-
 
 License
 
-This program is distributed under GNU GENERAL PUBLIC LICENSE.
-
-Contact
-
-You can send me a letter at tuzik87@inbox.ru.
+This program is distributed under the GNU GENERAL PUBLIC LICENSE.
 
 About program modification
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 4.0 RC3 or higher.
+It can be compiled under Lazarus 4.2 or higher.
 
 Version history
 
@@ -41,4 +37,4 @@ Version history
 0.2-0.2.1: The small bug has been fixed.
 0.2.2-0.2.4: The small changes.
 0.2.5: The source code was recompiled under Lazarus 4.0 RC3.
-0.2.6-0.2.8: The small changes.
+0.2.6-0.2.9: The small changes.
