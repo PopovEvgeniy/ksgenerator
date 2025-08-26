@@ -4,7 +4,7 @@ unit ksgeneratorcode;
 
 interface
 
-uses Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, LazFileUtils;
+uses Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls;
 
 type
 
@@ -34,7 +34,7 @@ implementation
 procedure window_setup();
 begin
  Application.Title:='KMS script generator';
- MainWindow.Caption:='KMS script generator 0.2.9';
+ MainWindow.Caption:='KMS script generator 0.3';
  MainWindow.BorderStyle:=bsDialog;
  MainWindow.Font.Name:=Screen.MenuFont.Name;
  MainWindow.Font.Size:=14;
@@ -78,7 +78,7 @@ procedure generate_script(const target:string;const server:string;const key:stri
 var batch:text;
 var script:string;
 begin
- script:=ExtractFileNameWithoutExt(target)+'.bat';
+ script:=target+'.bat';
  try
   Assign(batch,script);
   Rewrite(batch);
