@@ -1,6 +1,12 @@
 unit ksgeneratorcode;
 
-{$mode objfpc}{$H+}
+{
+ This sofware was made by Popov Evgeniy Alekseyevich.
+ It is distributed under the GNU GENERAL PUBLIC LICENSE (Version 2 or higher).
+}
+
+{$mode objfpc}
+{$H+}
 
 interface
 
@@ -20,9 +26,13 @@ type
     procedure ServerFieldChange(Sender: TObject);
     procedure KeyFieldChange(Sender: TObject);
   private
-
+    procedure window_setup();
+    procedure dialog_setup();
+    procedure interface_setup();
+    procedure language_setup();
+    procedure setup();
   public
-
+    { public declarations }
   end;
 
 var MainWindow: TMainWindow;
@@ -31,47 +41,47 @@ implementation
 
 {$R *.lfm}
 
-procedure window_setup();
+procedure TMainWindow.window_setup();
 begin
  Application.Title:='KMS script generator';
- MainWindow.Caption:='KMS script generator 0.3';
- MainWindow.BorderStyle:=bsDialog;
- MainWindow.Font.Name:=Screen.MenuFont.Name;
- MainWindow.Font.Size:=14;
+ Self.Caption:='KMS script generator 0.3.1';
+ Self.BorderStyle:=bsDialog;
+ Self.Font.Name:=Screen.MenuFont.Name;
+ Self.Font.Size:=14;
 end;
 
-procedure interface_setup();
+procedure TMainWindow.interface_setup();
 begin
- MainWindow.GenerateButton.Enabled:=False;
- MainWindow.GenerateButton.ShowHint:=False;
- MainWindow.ServerField.LabelPosition:=lpLeft;
- MainWindow.KeyField.LabelPosition:=lpLeft;
- MainWindow.ServerField.Text:='';
- MainWindow.KeyField.Text:='';
+ Self.GenerateButton.Enabled:=False;
+ Self.GenerateButton.ShowHint:=False;
+ Self.ServerField.LabelPosition:=lpLeft;
+ Self.KeyField.LabelPosition:=lpLeft;
+ Self.ServerField.Text:='';
+ Self.KeyField.Text:='';
 end;
 
-procedure dialog_setup();
+procedure TMainWindow.dialog_setup();
 begin
- MainWindow.SaveDialog.InitialDir:='';
- MainWindow.SaveDialog.FileName:='*.bat';
- MainWindow.SaveDialog.DefaultExt:='*.bat';
+ Self.SaveDialog.InitialDir:='';
+ Self.SaveDialog.FileName:='*.bat';
+ Self.SaveDialog.DefaultExt:='*.bat';
 end;
 
-procedure language_setup();
+procedure TMainWindow.language_setup();
 begin
- MainWindow.GenerateButton.Caption:='Generate';
- MainWindow.ServerField.EditLabel.Caption:='The KMS server';
- MainWindow.KeyField.EditLabel.Caption:='The product key';
- MainWindow.SaveDialog.Title:='Save a script';
- MainWindow.SaveDialog.Filter:='A batch script|*.bat';
+ Self.GenerateButton.Caption:='Generate';
+ Self.ServerField.EditLabel.Caption:='The KMS server';
+ Self.KeyField.EditLabel.Caption:='The product key';
+ Self.SaveDialog.Title:='Save a script';
+ Self.SaveDialog.Filter:='A batch script|*.bat';
 end;
 
-procedure setup();
+procedure TMainWindow.setup();
 begin
- window_setup();
- interface_setup();
- dialog_setup();
- language_setup();
+ Self.window_setup();
+ Self.interface_setup();
+ Self.dialog_setup();
+ Self.language_setup();
 end;
 
 procedure generate_script(const target:string;const server:string;const key:string);
@@ -97,26 +107,26 @@ end;
 
 procedure TMainWindow.FormCreate(Sender: TObject);
 begin
- setup();
+ Self.setup();
 end;
 
 procedure TMainWindow.GenerateButtonClick(Sender: TObject);
 begin
- if MainWindow.SaveDialog.Execute()=True then
+ if Self.SaveDialog.Execute()=True then
  begin
-  generate_script(MainWindow.SaveDialog.FileName,MainWindow.ServerField.Text,MainWindow.KeyField.Text);
+  generate_script(Self.SaveDialog.FileName,Self.ServerField.Text,Self.KeyField.Text);
  end;
 
 end;
 
 procedure TMainWindow.ServerFieldChange(Sender: TObject);
 begin
- MainWindow.GenerateButton.Enabled:=(MainWindow.ServerField.Text<>'') and (MainWindow.KeyField.Text<>'');
+ Self.GenerateButton.Enabled:=(Self.ServerField.Text<>'') and (Self.KeyField.Text<>'');
 end;
 
 procedure TMainWindow.KeyFieldChange(Sender: TObject);
 begin
- MainWindow.GenerateButton.Enabled:=(MainWindow.ServerField.Text<>'') and (MainWindow.KeyField.Text<>'');
+ Self.GenerateButton.Enabled:=(Self.ServerField.Text<>'') and (Self.KeyField.Text<>'');
 end;
 
 end.
