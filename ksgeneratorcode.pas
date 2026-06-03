@@ -10,7 +10,7 @@ unit ksgeneratorcode;
 
 interface
 
-uses Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls;
+uses Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, LazFileUtils;
 
 type
 
@@ -44,7 +44,7 @@ implementation
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='KMS script generator';
- Self.Caption:='KMS script generator 0.3.1';
+ Self.Caption:='KMS script generator 0.3.2';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -114,7 +114,7 @@ procedure TMainWindow.GenerateButtonClick(Sender: TObject);
 begin
  if Self.SaveDialog.Execute()=True then
  begin
-  generate_script(Self.SaveDialog.FileName,Self.ServerField.Text,Self.KeyField.Text);
+  generate_script(ExtractFileNameWithoutExt(Self.SaveDialog.FileName),Self.ServerField.Text,Self.KeyField.Text);
  end;
 
 end;
