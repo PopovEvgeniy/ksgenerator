@@ -44,7 +44,7 @@ implementation
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='KMS script generator';
- Self.Caption:='KMS script generator 0.3.3';
+ Self.Caption:='KMS script generator 0.3.5';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -89,17 +89,19 @@ var batch:text;
 var script:string;
 begin
  script:=target+'.bat';
- try
-  Assign(batch,script);
-  Rewrite(batch);
+ {$I-}
+ Assign(batch,script);
+ Rewrite(batch);
+ if IOResult()=0 then
+ begin
   writeln(batch,'@echo off');
   writeln(batch,'slmgr /ipk ',key);
   writeln(batch,'slmgr /skms ',server);
-  write(batch,'slmgr /ato');
+  writeln(batch,'slmgr /ato');
+  write(batch,'slmgr /xpr');
   Close(batch);
- except
-  ;
  end;
+ {$I+}
  generate_script:=FileExists(script);
 end;
 

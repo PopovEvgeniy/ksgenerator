@@ -1,17 +1,16 @@
                                          KMS script generator
 
-                                           Version 0.3.3
+                                           Version 0.3.5
 
                    The KMS activation script generator for Microsoft Windows by Popov Evgeniy Alekseyevich
 
 System requirements.
 
-Windows Vista or higher
+Windows Vista or higher.
 
 The program description.
 
-This software lets you create an activation script. It will activate Microsoft Windows via a custom KMS server.
-Please use this script for non-commercial home purposes only.
+This software lets you create an activation script. It will activate Microsoft Windows via a KMS server.
 The activation script needs admin rights for correct work. Run it as an admin.
 
 The product key.
@@ -38,4 +37,4 @@ Version history.
 0.3.0.1: The documentation has been updated.
 0.3.1: The small changes.
 0.3.2: A small bug has been fixed.
-0.3.3: The small changes.
+0.3.3-0.3.5: The small changes.
