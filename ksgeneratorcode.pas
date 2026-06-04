@@ -44,7 +44,7 @@ implementation
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='KMS script generator';
- Self.Caption:='KMS script generator 0.3.2';
+ Self.Caption:='KMS script generator 0.3.3';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -84,7 +84,7 @@ begin
  Self.language_setup();
 end;
 
-procedure generate_script(const target:string;const server:string;const key:string);
+function generate_script(const target:string;const server:string;const key:string):boolean;
 var batch:text;
 var script:string;
 begin
@@ -98,9 +98,9 @@ begin
   write(batch,'slmgr /ato');
   Close(batch);
  except
-  ShowMessage('The operation failed');
+  ;
  end;
-
+ generate_script:=FileExists(script);
 end;
 
 { TMainWindow }
@@ -114,7 +114,7 @@ procedure TMainWindow.GenerateButtonClick(Sender: TObject);
 begin
  if Self.SaveDialog.Execute()=True then
  begin
-  generate_script(ExtractFileNameWithoutExt(Self.SaveDialog.FileName),Self.ServerField.Text,Self.KeyField.Text);
+  if generate_script(ExtractFileNameWithoutExt(Self.SaveDialog.FileName),Self.ServerField.Text,Self.KeyField.Text)=False then ShowMessage('The operation failed');
  end;
 
 end;
