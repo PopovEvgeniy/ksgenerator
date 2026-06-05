@@ -10,7 +10,7 @@ unit ksgeneratorcode;
 
 interface
 
-uses Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, LazFileUtils;
+uses Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls;
 
 type
 
@@ -44,7 +44,7 @@ implementation
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='KMS script generator';
- Self.Caption:='KMS script generator 0.3.5';
+ Self.Caption:='KMS script generator 0.3.7';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -63,8 +63,8 @@ end;
 procedure TMainWindow.dialog_setup();
 begin
  Self.SaveDialog.InitialDir:='';
- Self.SaveDialog.FileName:='*.bat';
- Self.SaveDialog.DefaultExt:='*.bat';
+ Self.SaveDialog.FileName:='';
+ Self.SaveDialog.DefaultExt:='.bat';
 end;
 
 procedure TMainWindow.language_setup();
@@ -86,13 +86,13 @@ end;
 
 function generate_script(const target:string;const server:string;const key:string):boolean;
 var batch:text;
-var script:string;
+var success:boolean;
 begin
- script:=target+'.bat';
  {$I-}
- Assign(batch,script);
+ Assign(batch,target);
  Rewrite(batch);
- if IOResult()=0 then
+ success:=IOResult()=0;
+ if success then
  begin
   writeln(batch,'@echo off');
   writeln(batch,'slmgr /ipk ',key);
@@ -102,7 +102,7 @@ begin
   Close(batch);
  end;
  {$I+}
- generate_script:=FileExists(script);
+ generate_script:=success;
 end;
 
 { TMainWindow }
@@ -116,7 +116,7 @@ procedure TMainWindow.GenerateButtonClick(Sender: TObject);
 begin
  if Self.SaveDialog.Execute()=True then
  begin
-  if generate_script(ExtractFileNameWithoutExt(Self.SaveDialog.FileName),Self.ServerField.Text,Self.KeyField.Text)=False then ShowMessage('The operation failed');
+  if generate_script(Self.SaveDialog.FileName,Self.ServerField.Text,Self.KeyField.Text)=False then ShowMessage('The operation failed');
  end;
 
 end;
