@@ -26,6 +26,7 @@ type
     procedure ServerFieldChange(Sender: TObject);
     procedure KeyFieldChange(Sender: TObject);
   private
+    function check_input():boolean;
     procedure window_setup();
     procedure dialog_setup();
     procedure interface_setup();
@@ -39,12 +40,38 @@ var MainWindow: TMainWindow;
 
 implementation
 
+function generate_script(const target:string;const server:string;const key:string):boolean;
+var batch:text;
+var success:boolean;
+begin
+ {$I-}
+ Assign(batch,target);
+ Rewrite(batch);
+ success:=IOResult()=0;
+ if success then
+ begin
+  writeln(batch,'@echo off');
+  writeln(batch,'slmgr /ipk ',key);
+  writeln(batch,'slmgr /skms ',server);
+  writeln(batch,'slmgr /ato');
+  write(batch,'slmgr /xpr');
+  Close(batch);
+ end;
+ {$I+}
+ generate_script:=success;
+end;
+
 {$R *.lfm}
+
+function TMainWindow.check_input():boolean;
+begin
+ Result:=(Self.ServerField.Text<>'') and (Self.KeyField.Text<>'');
+end;
 
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='KMS script generator';
- Self.Caption:='KMS script generator 0.3.7';
+ Self.Caption:='KMS script generator 0.3.9';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -84,27 +111,6 @@ begin
  Self.language_setup();
 end;
 
-function generate_script(const target:string;const server:string;const key:string):boolean;
-var batch:text;
-var success:boolean;
-begin
- {$I-}
- Assign(batch,target);
- Rewrite(batch);
- success:=IOResult()=0;
- if success then
- begin
-  writeln(batch,'@echo off');
-  writeln(batch,'slmgr /ipk ',key);
-  writeln(batch,'slmgr /skms ',server);
-  writeln(batch,'slmgr /ato');
-  write(batch,'slmgr /xpr');
-  Close(batch);
- end;
- {$I+}
- generate_script:=success;
-end;
-
 { TMainWindow }
 
 procedure TMainWindow.FormCreate(Sender: TObject);
@@ -116,19 +122,19 @@ procedure TMainWindow.GenerateButtonClick(Sender: TObject);
 begin
  if Self.SaveDialog.Execute()=True then
  begin
-  if generate_script(Self.SaveDialog.FileName,Self.ServerField.Text,Self.KeyField.Text)=False then ShowMessage('The operation failed');
+  if generate_script(ChangeFileExt(Self.SaveDialog.FileName,Self.SaveDialog.DefaultExt),Self.ServerField.Text,Self.KeyField.Text)=False then ShowMessage('The operation failed');
  end;
 
 end;
 
 procedure TMainWindow.ServerFieldChange(Sender: TObject);
 begin
- Self.GenerateButton.Enabled:=(Self.ServerField.Text<>'') and (Self.KeyField.Text<>'');
+ Self.GenerateButton.Enabled:=Self.check_input();
 end;
 
 procedure TMainWindow.KeyFieldChange(Sender: TObject);
 begin
- Self.GenerateButton.Enabled:=(Self.ServerField.Text<>'') and (Self.KeyField.Text<>'');
+ Self.GenerateButton.Enabled:=Self.check_input();
 end;
 
 end.

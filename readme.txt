@@ -1,6 +1,6 @@
                                          KMS script generator
 
-                                           Version 0.3.7
+                                           Version 0.3.9
 
                    The KMS activation script generator for Microsoft Windows by Popov Evgeniy Alekseyevich
 
@@ -25,7 +25,7 @@ This program is distributed under the GNU GENERAL PUBLIC LICENSE.
 The source code.
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 4.6 or higher.
+It can be compiled under Lazarus 4.8 or higher.
 
 Version history.
 
@@ -38,3 +38,5 @@ Version history.
 0.3.1: The small changes.
 0.3.2: A small bug has been fixed.
 0.3.3-0.3.7: The small changes.
+0.3.8: A small bug has been fixed.
+0.3.9: The small changes.
