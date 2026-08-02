@@ -45,7 +45,7 @@ var batch:text;
 var success:boolean;
 begin
  {$I-}
- Assign(batch,target);
+ Assign(batch,ChangeFileExt(target,'.bat'));
  Rewrite(batch);
  success:=IOResult()=0;
  if success then
@@ -58,7 +58,7 @@ begin
   Close(batch);
  end;
  {$I+}
- generate_script:=success;
+ Result:=success;
 end;
 
 {$R *.lfm}
@@ -71,7 +71,7 @@ end;
 procedure TMainWindow.window_setup();
 begin
  Application.Title:='KMS script generator';
- Self.Caption:='KMS script generator 0.3.9';
+ Self.Caption:='KMS script generator 0.4.1';
  Self.BorderStyle:=bsDialog;
  Self.Font.Name:=Screen.MenuFont.Name;
  Self.Font.Size:=14;
@@ -122,7 +122,11 @@ procedure TMainWindow.GenerateButtonClick(Sender: TObject);
 begin
  if Self.SaveDialog.Execute()=True then
  begin
-  if generate_script(ChangeFileExt(Self.SaveDialog.FileName,Self.SaveDialog.DefaultExt),Self.ServerField.Text,Self.KeyField.Text)=False then ShowMessage('The operation failed');
+  if generate_script(Self.SaveDialog.FileName,Self.ServerField.Text,Self.KeyField.Text)=False then
+  begin
+   ShowMessage('The operation failed');
+  end;
+
  end;
 
 end;
